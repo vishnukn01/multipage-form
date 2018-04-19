@@ -75,11 +75,26 @@ function escapeString($string){
 }
 
 function insert($session_data = array()){
-
+	
+	
 	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	if(!$link){
 		echo 'Failed to connect to the db.';
 	}
+	$query = "
+				CREATE TABLE IF NOT EXISTS user_data
+				id int NOT NULL AUTO_INCREMENT,
+				name text NOT NULL,
+				email text NOT NULL,
+				interests text NOT NULL,
+				address text NOT NULL,
+				city text NOT NULL,
+				state text NOT NULL,
+				PRIMARY KEY (id)
+				
+			 ";
+	
+	$result = $link->query($query);
 	
 	foreach($session_data as $key=>$data){
 	
